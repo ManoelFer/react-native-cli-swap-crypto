@@ -1,14 +1,8 @@
-import {
-  SafeAreaView,
-  Text,
-} from 'react-native';
+import { SwapCrypto } from './src/screens';
 
 const App = () => {
-
   return (
-    <SafeAreaView>
-      <Text>Minha tela de Swap de Cripto</Text>
-    </SafeAreaView>
+    <SwapCrypto />
   );
 };
 

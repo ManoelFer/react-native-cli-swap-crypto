@@ -1,13 +1,32 @@
-import { TextInput } from "react-native"
-import { ViewStyled } from "./styles"
+import { ModalSelectCrypto } from "./ModalSelectCrypto"
 
+import { IInputProps } from "./interfaces"
 
-export const InputCrypto = () => {
+import { AroundInput, Container, TextInputStyled, VerticalLine } from "./styles"
+
+export const InputCrypto = ({ label, text, setText, cryptoSelected, style }: IInputProps) => {
     return (
-        <ViewStyled>
-            <TextInput placeholder="0" />
+        <Container style={style}>
 
-            <TextInput placeholder="0" />
-        </ViewStyled>
+            <AroundInput>
+                <TextInputStyled
+                    label={label}
+                    value={text}
+                    onChangeText={text => setText(text)}
+
+                    underlineColor="transparent"
+                    activeUnderlineColor="#2f2f2f"
+
+                    placeholderTextColor="#2f2f2f"
+                    textColor="#2f2f2f"
+
+                    underlineColorAndroid="#f5f5f5"
+                />
+                <VerticalLine />
+                <ModalSelectCrypto cryptoSelected={cryptoSelected} />
+            </AroundInput>
+
+        </Container>
+
     )
 }
