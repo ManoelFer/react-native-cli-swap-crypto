@@ -1,4 +1,4 @@
-import instance from "../../api.config"
+import instance from "@/shared/services/api.config"
 
 import { IReturnCurrencies } from "./interfaces"
 

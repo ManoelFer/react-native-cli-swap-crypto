@@ -18,7 +18,6 @@ export const InputCrypto = ({ label, text, setText, cryptoSelected, style }: IIn
                     activeUnderlineColor="#2f2f2f"
 
                     placeholderTextColor="#2f2f2f"
-                    textColor="#2f2f2f"
 
                     underlineColorAndroid="#f5f5f5"
                 />

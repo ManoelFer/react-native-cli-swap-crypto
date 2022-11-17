@@ -1,7 +1,7 @@
 
 import { useState } from 'react'
 
-import { InputCrypto } from '../../components'
+import { InputCrypto } from '@/components'
 
 import { ButtonExchange, Container, Content, Title } from './styles'
 

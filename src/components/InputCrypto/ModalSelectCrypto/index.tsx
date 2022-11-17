@@ -3,8 +3,8 @@ import { Modal, Alert, ListRenderItem } from "react-native";
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { compatibleCurrencies } from "../../../shared/services/SwapzoneEndpoints";
-import { IReturnCurrencies } from "../../../shared/services/SwapzoneEndpoints/compatibleCurrencies/interfaces";
+import { compatibleCurrencies } from "@/shared/services/SwapzoneEndpoints";
+import { IReturnCurrencies } from "@/shared/services/SwapzoneEndpoints/compatibleCurrencies/interfaces";
 
 import { IModalProps } from "./interfaces";
 
@@ -20,8 +20,6 @@ export const ModalSelectCrypto = ({ cryptoSelected }: IModalProps) => {
                 const cryptosEnabled = await compatibleCurrencies()
 
                 setCryptosList(cryptosEnabled)
-
-                console.log('cryptosEnabled :>> ', cryptosEnabled);
             } catch (error) {
                 Alert.alert("error in get cryptos list")
             }
@@ -57,7 +55,6 @@ export const ModalSelectCrypto = ({ cryptoSelected }: IModalProps) => {
                                 <Icon name="close" size={30} color="#d0d0d0" />
                             </ButtonClose>
                         </HeaderModal>
-
 
                         <TitleModal>Choose source Criptocurrency</TitleModal>
 
