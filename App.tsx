@@ -1,8 +1,11 @@
 import { SwapCrypto } from './src/screens';
+import { SwapCryptoContextProvider } from '@/context'
 
 const App = () => {
   return (
-    <SwapCrypto />
+    <SwapCryptoContextProvider>
+      <SwapCrypto />
+    </SwapCryptoContextProvider>
   );
 };
 
