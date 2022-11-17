@@ -21,3 +21,17 @@ export interface IReturnRate {
     quotaId: string;
     validUntil: Date;
 }
+
+export const defaultRate = {
+    adapter: "",
+    from: "",
+    fromNetwork: "",
+    to: "",
+    toNetwork: "",
+    amountFrom: 0,
+    amountTo: 0,
+    minAmount: 0,
+    maxAmount: 0,
+    quotaId: "",
+    validUntil: new Date()
+}

@@ -1,7 +1,9 @@
 import { InputCrypto } from '@/components'
 
-import { ButtonExchange, Container, Content, Title } from './styles'
 import useSwapHook from './useSwapHook'
+
+import { ButtonExchange, Container, Content, Title } from './styles'
+
 
 //TODO: A moeda a ser escolhida, será a que for selecionada no modal. Mas como temos pressa no SWAP, vamos fazer com moedas fixas
 export const SwapCrypto = () => {
@@ -10,7 +12,9 @@ export const SwapCrypto = () => {
         setCryptoToSend,
         handleCryptoBeforeSend,
         cryptoToReceive,
-        setCryptoToReceive
+        setCryptoToReceive,
+        handleSendTransaction,
+        loading
     } = useSwapHook()
 
     return (
@@ -40,9 +44,11 @@ export const SwapCrypto = () => {
 
             <ButtonExchange
                 mode="contained"
-                onPress={() => console.log('Pressed')}
+                onPress={handleSendTransaction}
+                loading={loading}
+                disabled={loading}
             >
-                Exchange
+                {loading ? "Loading..." : "Exchange"}
             </ButtonExchange>
         </Container>
     )

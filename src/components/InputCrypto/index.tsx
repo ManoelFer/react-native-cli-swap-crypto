@@ -1,9 +1,8 @@
-//@ts-nocheck
 import { ModalSelectCrypto } from "./ModalSelectCrypto"
 
-import { IInputProps } from "./interfaces"
-
 import { addOnlyNumberDotsAndEmptyStrings } from "@/shared/helpers"
+
+import { IInputProps } from "./interfaces"
 
 import { AroundInput, Container, TextInputStyled, VerticalLine } from "./styles"
 

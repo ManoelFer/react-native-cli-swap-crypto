@@ -4,4 +4,7 @@ export interface IUseSwapHook {
     cryptoToReceive: string;
     setCryptoToReceive: (cryptoToReceive: string) => void;
     handleCryptoBeforeSend: (cryptoToSend: string) => void;
+    handleSendTransaction: () => void;
+    loading: boolean;
+    setLoading: (loading: boolean) => void;
 }
