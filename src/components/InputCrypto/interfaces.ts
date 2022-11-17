@@ -2,7 +2,9 @@ import { ViewProps } from "react-native";
 
 export interface IInputProps extends ViewProps {
     label: string;
-    text: string;
-    setText: (text: string) => void;
+    amountSend: string;
+    setAmountSend: (amountSend: string) => void;
     cryptoSelected: string;
+    disabled: boolean;
+    onEndEditing?: () => void;
 }

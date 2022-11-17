@@ -1,22 +1,17 @@
-
-import { useState, useContext } from 'react'
-
 import { InputCrypto } from '@/components'
 
-import { SwapCryptoContext } from '@/context'
-
 import { ButtonExchange, Container, Content, Title } from './styles'
+import useSwapHook from './useSwapHook'
 
 //TODO: A moeda a ser escolhida, será a que for selecionada no modal. Mas como temos pressa no SWAP, vamos fazer com moedas fixas
 export const SwapCrypto = () => {
-    const [cryptoToSend, setCryptoToSend] = useState("")
-    //TODO: Alterar para o retornado pela API - Esse dado é estático, não pode ser alterado pelo usuário
-    const [cryptoToReceive, setCryptoToReceive] = useState("")
-
-    const { meuNome } = useContext(SwapCryptoContext)
-
-    console.log('meuNome :>> ', meuNome);
-
+    const {
+        cryptoToSend,
+        setCryptoToSend,
+        handleCryptoBeforeSend,
+        cryptoToReceive,
+        setCryptoToReceive
+    } = useSwapHook()
 
     return (
         <Container>
@@ -25,18 +20,21 @@ export const SwapCrypto = () => {
 
                 <InputCrypto
                     label='You send'
-                    text={cryptoToSend}
-                    setText={setCryptoToSend}
+                    amountSend={cryptoToSend}
+                    setAmountSend={setCryptoToSend}
                     cryptoSelected="ETH"
                     style={{ marginBottom: 20 }}
+                    disabled={false}
+                    onEndEditing={() => handleCryptoBeforeSend(cryptoToSend)}
                 />
 
                 <InputCrypto
                     label='You get'
-                    text={cryptoToReceive}
-                    setText={setCryptoToReceive}
+                    amountSend={cryptoToReceive}
+                    setAmountSend={setCryptoToReceive}
                     cryptoSelected="BAT"
                     style={{ marginBottom: 40 }}
+                    disabled={true}
                 />
             </Content>
 

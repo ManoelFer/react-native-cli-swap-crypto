@@ -1,7 +1,10 @@
 import { ReactNode } from "react";
 
+import { IReturnRate } from "@/shared/services/SwapzoneEndpoints/getRate/interfaces";
+
 export interface ISwapCryptoContextProps {
-    meuNome: string;
+    currentRate?: IReturnRate;
+    setCurrentRate: (currentRate: IReturnRate) => void;
 }
 
 export interface ISwapCryptoContextProviderProps {
