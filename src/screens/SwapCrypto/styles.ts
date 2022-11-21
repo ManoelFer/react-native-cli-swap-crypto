@@ -24,9 +24,14 @@ export const Title = styled.Text`
     font-weight: bold;
 `
 
+export const SpaceBetweenInputs = styled.View`
+    height: 20px;
+`
+
 export const ButtonExchange = styled(Button)`
     background-color: #25b7eb;
     color: #d0d0d0;
 
     border-radius: 5px;
+    margin-top: 20%;
 `

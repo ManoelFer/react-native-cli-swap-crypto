@@ -1,21 +1,31 @@
+import { useContext } from 'react'
+
 import { InputCrypto } from '@/components'
 
 import useSwapHook from './useSwapHook'
 
-import { ButtonExchange, Container, Content, Title } from './styles'
+import { SwapCryptoContext } from '@/context'
+
+import { ButtonExchange, Container, Content, SpaceBetweenInputs, Title } from './styles'
+import { DefaultTheme } from 'react-native-paper'
+import { addOnlyNumberDotsAndEmptyStrings } from '@/shared/helpers'
+
 
 
 //TODO: A moeda a ser escolhida, será a que for selecionada no modal. Mas como temos pressa no SWAP, vamos fazer com moedas fixas
 export const SwapCrypto = () => {
     const {
-        cryptoToSend,
-        setCryptoToSend,
-        handleCryptoBeforeSend,
-        cryptoToReceive,
-        setCryptoToReceive,
         handleSendTransaction,
         loading
     } = useSwapHook()
+
+    const {
+        currentCryptoToSend,
+        setCurrentCryptoToSend,
+        currentCryptoToReceived,
+        setCurrentCryptoToReceived,
+        handleCryptoBeforeSend
+    } = useContext(SwapCryptoContext)
 
     return (
         <Container>
@@ -24,21 +34,25 @@ export const SwapCrypto = () => {
 
                 <InputCrypto
                     label='You send'
-                    amountSend={cryptoToSend}
-                    setAmountSend={setCryptoToSend}
-                    cryptoSelected="ETH"
-                    style={{ marginBottom: 20 }}
-                    disabled={false}
-                    onEndEditing={() => handleCryptoBeforeSend(cryptoToSend)}
-                />
+                    value={currentCryptoToSend.amount}
+                    onChangeText={(value) => setCurrentCryptoToSend({ ...currentCryptoToSend, amount: addOnlyNumberDotsAndEmptyStrings(value, currentCryptoToSend.amount || "") })}
 
+                    keyboardType="numeric"
+
+                    cryptoSelected={currentCryptoToSend.ticker}
+                    disabled={false}
+
+                    onEndEditing={() => handleCryptoBeforeSend(currentCryptoToSend.amount?.toString() || "")}
+                    theme={DefaultTheme}
+                />
+                <SpaceBetweenInputs />
                 <InputCrypto
                     label='You get'
-                    amountSend={cryptoToReceive}
-                    setAmountSend={setCryptoToReceive}
-                    cryptoSelected="BAT"
-                    style={{ marginBottom: 40 }}
+                    value={currentCryptoToReceived.amount || ""}
+                    onChangeText={(value) => setCurrentCryptoToReceived({ ...currentCryptoToReceived, amount: value })}
+                    cryptoSelected={currentCryptoToReceived.ticker}
                     disabled={true}
+                    theme={DefaultTheme}
                 />
             </Content>
 

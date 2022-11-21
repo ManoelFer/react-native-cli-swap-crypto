@@ -1,40 +1,30 @@
-import { useState, useEffect } from "react";
-import { Modal, Alert, ListRenderItem } from "react-native";
+import { Modal, ListRenderItem } from "react-native";
+import { DefaultTheme } from "react-native-paper";
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { compatibleCurrencies } from "@/shared/services/SwapzoneEndpoints";
 import { IReturnCurrencies } from "@/shared/services/SwapzoneEndpoints/compatibleCurrencies/interfaces";
 
 import { IModalProps } from "./interfaces";
 
-import { Button, ButtonClose, Container, HeaderModal, List, ModalContainer, ModalContent, TextButton, TitleModal } from "./styles"
+import { Button, ButtonClose, CardCrypto, Container, HeaderModal, List, ModalContainer, ModalContent, TextButton, TextCardCrypto, TitleModal } from "./styles"
+import { DefaultInput } from "@/components/DefaultInput";
 
-export const ModalSelectCrypto = ({ cryptoSelected }: IModalProps) => {
-    const [modalVisible, setModalVisible] = useState(false);
-    const [cryptosList, setCryptosList] = useState<IReturnCurrencies[]>();
+import useModalHook from "./useModalHook";
 
-    useEffect(() => {
-        async function loadCurrencies() {
-            try {
-                const cryptosEnabled = await compatibleCurrencies()
-
-                setCryptosList(cryptosEnabled)
-            } catch (error) {
-                Alert.alert("error in get cryptos list")
-            }
-        }
-
-        loadCurrencies()
-    }, [])
-
+export const ModalSelectCrypto = ({ cryptoSelected, isToSend }: IModalProps) => {
+    const { modalVisible, setModalVisible, handleCloseModal, cryptosList, filteredList, selectedCrypto, handleSearchCurrency, currentSearchCurrency } = useModalHook()
 
     const renderCryptos: ListRenderItem<IReturnCurrencies> = ({ item }) => (
-        <TitleModal>
-            {item?.name}
-        </TitleModal>
-    );
+        <CardCrypto key={item.ticker} onPress={() => { selectedCrypto(isToSend, item) }}>
+            <TextCardCrypto >
+                Crypto: {item?.name}{'\n'}{'\n'}
+                Network: {item?.network}
+            </TextCardCrypto>
+            <Icon name="database" size={20} color="#d0d0d0" />
+        </CardCrypto>
 
+    )
 
     return (
         <Container>
@@ -42,26 +32,29 @@ export const ModalSelectCrypto = ({ cryptoSelected }: IModalProps) => {
                 animationType="slide"
                 transparent={true}
                 visible={modalVisible}
-                onRequestClose={() => {
-                    setModalVisible(!modalVisible);
-                }}
             >
                 <ModalContainer>
-
                     <ModalContent >
                         <HeaderModal>
                             <ButtonClose
-                                onPress={() => setModalVisible(!modalVisible)}>
+                                onPress={() => handleCloseModal()}>
                                 <Icon name="close" size={30} color="#d0d0d0" />
                             </ButtonClose>
                         </HeaderModal>
 
-                        <TitleModal>Choose source Criptocurrency</TitleModal>
+                        <TitleModal>Choose {isToSend ? "cryptocurrency to send" : "cryptocurrency to receive"}</TitleModal>
+
+                        <DefaultInput
+                            label="Search currency by crypto name"
+                            value={currentSearchCurrency}
+                            onChangeText={(value) => handleSearchCurrency(value)}
+                            theme={DefaultTheme}
+                        />
 
                         <List
-                            data={cryptosList}
+                            data={filteredList?.length > 0 && filteredList[0].name !== "" ? filteredList : cryptosList}
                             keyExtractor={(_crypto, index) => index.toString()}
-                            //@ts-ignore 
+                            //@ts-ignore
                             renderItem={renderCryptos}
                         />
 

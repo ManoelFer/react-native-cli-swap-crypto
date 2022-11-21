@@ -26,7 +26,7 @@ export const HeaderModal = styled.View`
     align-items: flex-end;
 
     padding: 10px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
 `
 
 export const ButtonClose = styled.Pressable`
@@ -35,6 +35,7 @@ export const ButtonClose = styled.Pressable`
 export const TitleModal = styled.Text`
     color: #d0d0d0;
     font-weight: bold;
+    margin-bottom: 5%;
 `
 
 export const Button = styled.Pressable`
@@ -56,4 +57,23 @@ export const TextButton = styled.Text`
 `
 
 export const List = styled.FlatList`
+    width: 100%;
+    padding: 20px;
+    margin-top: 5%;
+`
+
+export const CardCrypto = styled.Pressable`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #2f2f2f;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    padding: 10px;
+`
+
+export const TextCardCrypto = styled.Text`
+    color: #d0d0d0;
+    font-weight: bold;
 `

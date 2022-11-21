@@ -1,36 +1,20 @@
-import { ModalSelectCrypto } from "./ModalSelectCrypto"
-
-import { addOnlyNumberDotsAndEmptyStrings } from "@/shared/helpers"
-
 import { IInputProps } from "./interfaces"
 
-import { AroundInput, Container, TextInputStyled, VerticalLine } from "./styles"
+import { DefaultInput } from "../DefaultInput"
+import { ModalSelectCrypto } from "./ModalSelectCrypto"
 
+import { AroundInput, Container, VerticalLine } from "./styles"
 
-export const InputCrypto = ({ label, amountSend, setAmountSend, cryptoSelected, disabled, onEndEditing, style }: IInputProps) => {
+export const InputCrypto = (props: IInputProps) => {
+    const { cryptoSelected, label } = props
 
     return (
-        <Container style={style}>
-
+        <Container>
             <AroundInput>
-                <TextInputStyled
-                    label={label}
-                    value={amountSend}
-                    onChangeText={value => setAmountSend(addOnlyNumberDotsAndEmptyStrings(value, amountSend))}
-
-                    keyboardType="numeric"
-
-                    underlineColor="transparent"
-                    activeUnderlineColor="#2f2f2f"
-                    placeholderTextColor="#2f2f2f"
-                    underlineColorAndroid="#f5f5f5"
-                    onEndEditing={onEndEditing}
-                    disabled={disabled}
-                />
+                <DefaultInput {...props} />
                 <VerticalLine />
-                <ModalSelectCrypto cryptoSelected={cryptoSelected} />
+                <ModalSelectCrypto cryptoSelected={cryptoSelected} isToSend={label === "You send" ? true : false} />
             </AroundInput>
-
         </Container>
 
     )

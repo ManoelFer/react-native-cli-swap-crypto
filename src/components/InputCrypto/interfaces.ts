@@ -1,10 +1,5 @@
-import { ViewProps } from "react-native";
+import { TextInputProps } from "react-native-paper";
 
-export interface IInputProps extends ViewProps {
-    label: string;
-    amountSend: string;
-    setAmountSend: (amountSend: string) => void;
+export interface IInputProps extends TextInputProps {
     cryptoSelected: string;
-    disabled: boolean;
-    onEndEditing?: () => void;
 }

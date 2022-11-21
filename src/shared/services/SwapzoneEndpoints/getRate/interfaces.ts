@@ -20,6 +20,8 @@ export interface IReturnRate {
     maxAmount?: number;
     quotaId: string;
     validUntil: Date;
+    error?: string;
+    message?: string;
 }
 
 export const defaultRate = {
