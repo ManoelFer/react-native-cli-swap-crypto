@@ -8,18 +8,18 @@ export const Container = styled.SafeAreaView`
     display: flex;
 
     background-color: #F8F9FA;
-    justify-content: center;
     align-items: center;
 `
 
 export const Content = styled.View`
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 2%;
 `
 
 export const Title = styled.Text`
+    font-size: 20px;
     margin-bottom: 10%;
     font-weight: bold;
 `
@@ -33,5 +33,19 @@ export const ButtonExchange = styled(Button)`
     color: #d0d0d0;
 
     border-radius: 5px;
-    margin-top: 20%;
+`
+
+export const ReadmeTextLink = styled.Text`
+    color: #25b7eb;
+    margin-bottom: 10%;
+    margin-top: 10%;
+    font-weight: bold;
+`
+
+export const ContainerLottie = styled.View`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
+    height: 200px;
 `

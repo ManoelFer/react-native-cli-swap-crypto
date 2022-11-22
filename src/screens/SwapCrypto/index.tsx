@@ -1,12 +1,16 @@
 import { useContext } from 'react'
 
+import Lottie from 'lottie-react-native';
+
+import { swapLottie } from '@/assets'
+
 import { InputCrypto } from '@/components'
 
 import useSwapHook from './useSwapHook'
 
 import { SwapCryptoContext } from '@/context'
 
-import { ButtonExchange, Container, Content, SpaceBetweenInputs, Title } from './styles'
+import { ButtonExchange, Container, ContainerLottie, Content, ReadmeTextLink, SpaceBetweenInputs, Title } from './styles'
 import { DefaultTheme } from 'react-native-paper'
 import { addOnlyNumberDotsAndEmptyStrings } from '@/shared/helpers'
 
@@ -30,6 +34,11 @@ export const SwapCrypto = () => {
     return (
         <Container>
             <Content>
+
+                <ContainerLottie>
+                    <Lottie source={swapLottie} autoPlay loop />
+                </ContainerLottie>
+
                 <Title>Exchange crypto</Title>
 
                 <InputCrypto
@@ -55,6 +64,11 @@ export const SwapCrypto = () => {
                     theme={DefaultTheme}
                 />
             </Content>
+
+            <ReadmeTextLink>
+                How do we work? 👨‍💻
+            </ReadmeTextLink>
+
 
             <ButtonExchange
                 mode="contained"
