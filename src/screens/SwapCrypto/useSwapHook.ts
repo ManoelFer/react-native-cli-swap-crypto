@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react'
-import { Alert } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 import { SwapCryptoContext } from '@/context';
 
@@ -23,7 +23,14 @@ const useSwapHook = (): IUseSwapHook => {
             se existe um valor para ser trocado e se já foi carregado o quotaId
         */
         if (!currentCryptoToSend.amount && !currentRate?.quotaId) {
-            return Alert.alert("Empty value to send or get")
+            setLoading(false)
+
+            return Toast.show({
+                type: 'info',
+                text1: "Empty value to send or get",
+                text2: "You need add on value to send or get! 😯",
+                visibilityTime: 7000
+            })
         }
 
         try {
@@ -32,10 +39,21 @@ const useSwapHook = (): IUseSwapHook => {
             setCurrentTransaction(resTransaction)
             setLoading(false)
 
-            Alert.alert("Transaction created")
-        } catch (error) {
+            Toast.show({
+                type: 'success',
+                text1: 'Transaction created',
+                text2: "Your transaction was successfully! 🫡",
+                visibilityTime: 7000
+            })
+        } catch (error: any) {
             setLoading(false)
-            Alert.alert("Erro in create transaction")
+
+            Toast.show({
+                type: 'error',
+                text1: 'Error in create transaction',
+                text2: error.message || "",
+                visibilityTime: 7000
+            })
         }
     }
 

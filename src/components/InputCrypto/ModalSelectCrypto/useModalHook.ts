@@ -1,6 +1,7 @@
 
 import { useEffect, useState, useContext } from 'react'
-import { Alert } from 'react-native';
+
+import Toast from 'react-native-toast-message';
 
 import { defaultCurrencies, IReturnCurrencies } from '@/shared/services/SwapzoneEndpoints/compatibleCurrencies/interfaces';
 import { compatibleCurrencies } from '@/shared/services/SwapzoneEndpoints';
@@ -29,8 +30,13 @@ const useModalHook = (): IUseModalHook => {
                 const cryptosEnabled = await compatibleCurrencies()
 
                 setCryptosList(cryptosEnabled)
-            } catch (error) {
-                Alert.alert("error in get cryptos list")
+            } catch (error: any) {
+                Toast.show({
+                    type: 'error',
+                    text1: "Error in get cryptocurrencies list",
+                    text2: error?.message || "",
+                    visibilityTime: 7000
+                })
             }
         }
 

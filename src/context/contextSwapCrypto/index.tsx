@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
-import { Alert } from 'react-native'
+
+import Toast from 'react-native-toast-message';
 
 import { defaultRate, IReturnRate } from "@/shared/services/SwapzoneEndpoints/getRate/interfaces";
 import { defaultTransaction, IResponseTransaction } from "@/shared/services/SwapzoneEndpoints/createTransaction/interfaces"
@@ -53,7 +54,18 @@ export function SwapCryptoContextProvider({
         } catch (error: any) {
             console.log('Original erro to get rate :>> ', error.message);
             setCurrentCryptoToReceived({ ...currentCryptoToReceived, amount: undefined })
-            Alert.alert(`Error to get rate! Original API error: ${error?.message}`)
+            let message = ""
+
+            if (error?.message) {
+                message = error.message.split("r.")[1]
+            }
+
+            Toast.show({
+                type: 'error',
+                text1: 'Error to get rate',
+                text2: message || "",
+                visibilityTime: 7000
+            })
         }
     }
 

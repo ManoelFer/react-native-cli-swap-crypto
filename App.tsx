@@ -1,13 +1,17 @@
 import { SwapCrypto } from './src/screens';
 import { SwapCryptoContextProvider } from '@/context'
 
-import { View } from 'react-native'
+import Toast from 'react-native-toast-message';
 
 const App = () => {
   return (
-    <SwapCryptoContextProvider>
-      <SwapCrypto />
-    </SwapCryptoContextProvider>
+    <>
+      <SwapCryptoContextProvider>
+        <SwapCrypto />
+      </SwapCryptoContextProvider>
+      <Toast />
+    </>
+
   );
 };
 
